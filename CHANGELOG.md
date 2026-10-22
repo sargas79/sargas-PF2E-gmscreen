@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 (2026-10-21)
 
 First version, for Foundry VTT v14 and the PF2e system 8.x.
 

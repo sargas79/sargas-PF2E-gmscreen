@@ -1,6 +1,7 @@
 import { I18N, MODULE_ID } from "../constants.js";
 import { SETTINGS, getSetting, setSetting } from "../settings.js";
 import { loadData } from "../util/data.js";
+import { bindOnce } from "../util/dom.js";
 import { enrich, getIndex, uuidLink } from "../util/compendium.js";
 import {
   LOOT_CATEGORIES,
@@ -119,6 +120,7 @@ export async function prepareCards() {
 
 export function onRender(app, element) {
   for (const select of element.querySelectorAll("select[name=budgetLevel]")) {
+    if (!bindOnce(select)) continue;
     select.addEventListener("change", (event) => {
       state.budgetLevel = Number(event.currentTarget.value);
       app.render({ parts: REFRESH_PARTS });
