@@ -1,15 +1,12 @@
-<h4>{{localize "SARGAS_GMSCREEN.Rules.Environment.cover"}}</h4>
 <table>
+  <thead><tr><th colspan="2">{{localize "SARGAS_GMSCREEN.Rules.Environment.cover"}}</th></tr></thead>
   <tbody>
     <tr><th>{{localize "SARGAS_GMSCREEN.Rules.Environment.lesserCover"}}</th><td>{{localize "SARGAS_GMSCREEN.Rules.Environment.lesserCoverRule"}}</td></tr>
     <tr><th>{{localize "SARGAS_GMSCREEN.Rules.Environment.standardCover"}}</th><td>{{localize "SARGAS_GMSCREEN.Rules.Environment.standardCoverRule"}}</td></tr>
     <tr><th>{{localize "SARGAS_GMSCREEN.Rules.Environment.greaterCover"}}</th><td>{{localize "SARGAS_GMSCREEN.Rules.Environment.greaterCoverRule"}}</td></tr>
   </tbody>
 </table>
-<h4>{{localize "SARGAS_GMSCREEN.Rules.Environment.terrain"}}</h4>
-<p>{{localize "SARGAS_GMSCREEN.Rules.Environment.terrainRule"}}</p>
-<h4>{{localize "SARGAS_GMSCREEN.Rules.Environment.light"}}</h4>
-<p>{{localize "SARGAS_GMSCREEN.Rules.Environment.lightRule"}}</p>
-<h4>{{localize "SARGAS_GMSCREEN.Rules.Environment.falling"}}</h4>
-<p>{{localize "SARGAS_GMSCREEN.Rules.Environment.fallingRule"}}</p>
-<p class="gms-muted">{{#each links}}{{{this}}} {{/each}}</p>
+<p><strong>{{localize "SARGAS_GMSCREEN.Rules.Environment.terrain"}}.</strong> {{localize "SARGAS_GMSCREEN.Rules.Environment.terrainRule"}}</p>
+<p><strong>{{localize "SARGAS_GMSCREEN.Rules.Environment.light"}}.</strong> {{localize "SARGAS_GMSCREEN.Rules.Environment.lightRule"}}</p>
+<p><strong>{{localize "SARGAS_GMSCREEN.Rules.Environment.falling"}}.</strong> {{localize "SARGAS_GMSCREEN.Rules.Environment.fallingRule"}}</p>
+<footer class="gms-card-links">{{#each links}}{{{this}}}{{/each}}</footer>

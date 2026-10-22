@@ -46,6 +46,7 @@ export function getPartyLevel(members = getPartyMembers()) {
 /** Everything a Party tab row shows, as plain data. */
 export function summarizeCharacter(actor) {
   const hp = actor.system.attributes?.hp ?? {};
+  const hpPercent = hp.max ? Math.clamp(Math.round((100 * (hp.value ?? 0)) / hp.max), 0, 100) : 0;
   const perceptionMod = actor.perception?.mod ?? 0;
   const spellDCs = Array.from(actor.spellcasting ?? [])
     .map((entry) => entry.statistic?.dc?.value)
@@ -63,7 +64,8 @@ export function summarizeCharacter(actor) {
       value: hp.value ?? 0,
       max: hp.max ?? 0,
       temp: hp.temp ?? 0,
-      percent: hp.max ? Math.clamp(Math.round((100 * (hp.value ?? 0)) / hp.max), 0, 100) : 0,
+      percent: hpPercent,
+      state: hpPercent <= 33 ? "low" : hpPercent <= 66 ? "mid" : "",
     },
     ac: actor.armorClass?.value ?? null,
     saves: {

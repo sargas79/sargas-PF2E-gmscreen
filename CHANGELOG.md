@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.1 (2026-10-22)
+
+- **Denser layout.** Cards now pack into columns instead of a grid, so short cards no longer leave holes next to tall ones. Full-width cards (Conditions, Actions, Party) sit at the top.
+- **Rules tab:**
+  - DCs by level is now a compact grid of tiles.
+  - Conditions, actions and journal pages are compact chips; a condition's summary shows on hover.
+  - Proficiency DCs and Recall Knowledge are two-column lists.
+- **Party and Treasure tabs:**
+  - Tighter Party table, with HP bars that turn amber and red as HP drops.
+  - Treasure tab uses wider columns so its tables fit.
+- **Pinned cards** sit in a tidy grid instead of being split sideways.
+
 ## 0.1.0 (2026-10-21)
 
 First version, for Foundry VTT v14 and the PF2e system 8.x.

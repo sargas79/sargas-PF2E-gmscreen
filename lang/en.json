@@ -31,7 +31,8 @@
       "Difficulty": "Difficulty",
       "Adjustment": "Adjustment",
       "Rarity": "Rarity",
-      "ConditionsHint": "Click to read, drag onto a token, a character sheet or a Party row to apply. X = has a value.",
+      "ConditionsHint": "Hover for a summary, click to read, drag onto a token, sheet or Party row to apply. X = has a value.",
+      "Valued": "Has a value",
       "NotesPlaceholder": "House rules, reminders, session notes…",
       "Cards": {
         "dcs-by-level": "DCs by Level",

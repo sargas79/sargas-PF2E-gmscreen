@@ -85,7 +85,8 @@ export class GMScreen extends HandlebarsApplicationMixin(ApplicationV2) {
     const parts = options.parts ?? TABS.map((t) => t.id);
     await Promise.all(
       TABS.filter((tab) => parts.includes(tab.id) || !cardsByTab[tab.id]).map(async (tab) => {
-        const cards = await tab.prepareCards(this);
+        // Full-width cards go first: one in the middle would cut the packed columns in two.
+        const cards = (await tab.prepareCards(this)).sort((a, b) => Number(!!b.wide) - Number(!!a.wide));
         cardsByTab[tab.id] = await Promise.all(
           cards.map(async (card) => {
             const key = `${tab.id}.${card.id}`;

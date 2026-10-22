@@ -1,16 +1,13 @@
-<table>
-  <thead><tr><th>{{localize "SARGAS_GMSCREEN.Rules.Proficiency"}}</th><th>{{localize "SARGAS_GMSCREEN.Rules.DC"}}</th></tr></thead>
-  <tbody>
-    {{#each simple}}
-    <tr><td>{{localize (concat "SARGAS_GMSCREEN.Rules.Ranks." rank)}}</td><td>{{dc}}</td></tr>
-    {{/each}}
-  </tbody>
-</table>
+<ul class="gms-pairs">
+  {{#each simple}}
+  <li><span>{{localize (concat "SARGAS_GMSCREEN.Rules.Ranks." rank)}}</span><strong>{{dc}}</strong></li>
+  {{/each}}
+</ul>
 <table>
   <thead>
     <tr>
       <th>{{localize "SARGAS_GMSCREEN.Rules.Difficulty"}}</th>
-      <th>{{localize "SARGAS_GMSCREEN.Rules.Adjustment"}}</th>
+      <th class="num">{{localize "SARGAS_GMSCREEN.Rules.Adjustment"}}</th>
       <th>{{localize "SARGAS_GMSCREEN.Rules.Rarity"}}</th>
     </tr>
   </thead>
@@ -18,10 +15,10 @@
     {{#each difficulty}}
     <tr>
       <td>{{localize (concat "SARGAS_GMSCREEN.Rules.Difficulties." key)}}</td>
-      <td>{{numberFormat adjustment sign=true}}</td>
-      <td>{{#if rarity}}{{localize (concat "SARGAS_GMSCREEN.Rules.Rarities." rarity)}}{{/if}}</td>
+      <td class="num">{{numberFormat adjustment sign=true}}</td>
+      <td class="gms-muted">{{#if rarity}}{{localize (concat "SARGAS_GMSCREEN.Rules.Rarities." rarity)}}{{/if}}</td>
     </tr>
     {{/each}}
   </tbody>
 </table>
-<p class="gms-muted">{{#each links}}{{{this}}} {{/each}}</p>
+<footer class="gms-card-links">{{#each links}}{{{this}}}{{/each}}</footer>
