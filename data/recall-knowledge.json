@@ -1,0 +1,21 @@
+[
+  { "trait": "aberration", "skills": ["occultism"] },
+  { "trait": "animal", "skills": ["nature"] },
+  { "trait": "astral", "skills": ["occultism"] },
+  { "trait": "beast", "skills": ["arcana", "nature"] },
+  { "trait": "celestial", "skills": ["religion"] },
+  { "trait": "construct", "skills": ["arcana", "crafting"] },
+  { "trait": "dragon", "skills": ["arcana"] },
+  { "trait": "dream", "skills": ["occultism"] },
+  { "trait": "elemental", "skills": ["arcana", "nature"] },
+  { "trait": "ethereal", "skills": ["occultism"] },
+  { "trait": "fey", "skills": ["nature"] },
+  { "trait": "fiend", "skills": ["religion"] },
+  { "trait": "fungus", "skills": ["nature"] },
+  { "trait": "humanoid", "skills": ["society"] },
+  { "trait": "monitor", "skills": ["religion"] },
+  { "trait": "ooze", "skills": ["occultism"] },
+  { "trait": "plant", "skills": ["nature"] },
+  { "trait": "spirit", "skills": ["occultism"] },
+  { "trait": "undead", "skills": ["religion"] }
+]

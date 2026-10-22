@@ -1,0 +1,72 @@
+{{#if rows.length}}
+<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Party.RosterHint"}}</p>
+<table class="gms-roster">
+  <thead>
+    <tr>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Columns.character"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Columns.hp"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Stats.ac"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Stats.fortitude"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Stats.reflex"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Stats.will"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Stats.perception"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Columns.dcs"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Columns.heroPoints"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Party.Columns.conditions"}}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each rows}}
+    <tr data-actor-id="{{id}}" data-drop-actor-id="{{id}}" data-search="{{name}} {{className}}">
+      <td class="gms-who">
+        <img src="{{img}}" alt="" width="32" height="32">
+        <div>
+          <strong>{{name}}</strong>
+          <div class="gms-muted">{{className}} {{level}}</div>
+          <div class="gms-muted">{{#each speeds}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{#if senses.length}} · {{#each senses}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}}</div>
+        </div>
+      </td>
+      <td class="gms-hp">
+        <div class="gms-hp-bar" role="meter" aria-valuemin="0" aria-valuemax="{{hp.max}}" aria-valuenow="{{hp.value}}">
+          <span style="width: {{hp.percent}}%"></span>
+        </div>
+        <div class="gms-hp-controls">
+          <button type="button" class="icon fa-solid fa-minus" data-action="adjustHp" data-direction="-1"
+            data-tooltip="SARGAS_GMSCREEN.Party.HpMinus" aria-label="{{localize 'SARGAS_GMSCREEN.Party.HpMinus'}}"></button>
+          <span>{{hp.value}}/{{hp.max}}{{#if hp.temp}} <span class="gms-muted">(+{{hp.temp}})</span>{{/if}}</span>
+          <button type="button" class="icon fa-solid fa-plus" data-action="adjustHp" data-direction="1"
+            data-tooltip="SARGAS_GMSCREEN.Party.HpPlus" aria-label="{{localize 'SARGAS_GMSCREEN.Party.HpPlus'}}"></button>
+        </div>
+      </td>
+      <td>{{ac}}</td>
+      <td>{{numberFormat saves.fortitude sign=true}}</td>
+      <td>{{numberFormat saves.reflex sign=true}}</td>
+      <td>{{numberFormat saves.will sign=true}}</td>
+      <td>{{numberFormat perception.mod sign=true}} <span class="gms-muted">({{perception.dc}})</span></td>
+      <td>
+        {{#if classDC}}<div>{{localize "SARGAS_GMSCREEN.Party.ClassDC"}} {{classDC}}</div>{{/if}}
+        {{#if spellDC}}<div>{{localize "SARGAS_GMSCREEN.Party.SpellDC"}} {{spellDC}}</div>{{/if}}
+      </td>
+      <td>{{heroPoints.value}}/{{heroPoints.max}}</td>
+      <td class="gms-conditions">
+        {{#each conditions}}
+        <button type="button" class="gms-condition" data-action="decreaseCondition" data-condition-id="{{id}}"
+          data-tooltip="{{name}}{{#if value}} {{value}}{{/if}}" aria-label="{{name}}{{#if value}} {{value}}{{/if}}">
+          <img src="{{img}}" alt="" width="24" height="24">{{#if value}}<span>{{value}}</span>{{/if}}
+        </button>
+        {{/each}}
+      </td>
+      <td class="gms-row-actions">
+        <button type="button" class="icon fa-solid fa-id-card" data-action="openSheet"
+          data-tooltip="SARGAS_GMSCREEN.Party.OpenSheet" aria-label="{{localize 'SARGAS_GMSCREEN.Party.OpenSheet'}}"></button>
+        <button type="button" class="icon fa-solid fa-location-crosshairs" data-action="pingToken"
+          data-tooltip="SARGAS_GMSCREEN.Party.Ping" aria-label="{{localize 'SARGAS_GMSCREEN.Party.Ping'}}"></button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+<p>{{localize "SARGAS_GMSCREEN.Party.Empty"}}</p>
+{{/if}}

@@ -1,0 +1,17 @@
+{
+  "simple": [
+    { "rank": "untrained", "dc": 10 },
+    { "rank": "trained", "dc": 15 },
+    { "rank": "expert", "dc": 20 },
+    { "rank": "master", "dc": 30 },
+    { "rank": "legendary", "dc": 40 }
+  ],
+  "difficulty": [
+    { "key": "incrediblyEasy", "adjustment": -10 },
+    { "key": "veryEasy", "adjustment": -5 },
+    { "key": "easy", "adjustment": -2 },
+    { "key": "hard", "adjustment": 2, "rarity": "uncommon" },
+    { "key": "veryHard", "adjustment": 5, "rarity": "rare" },
+    { "key": "incrediblyHard", "adjustment": 10, "rarity": "unique" }
+  ]
+}
