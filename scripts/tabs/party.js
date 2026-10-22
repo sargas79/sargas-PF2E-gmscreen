@@ -1,5 +1,6 @@
 import { I18N, MODULE_ID } from "../constants.js";
 import { SETTINGS, getSetting, setSetting } from "../settings.js";
+import { bindOnce } from "../util/dom.js";
 import {
   adjustHitPoints,
   applyItem,
@@ -96,6 +97,7 @@ export function onRender(app, element) {
   registerHooks(app);
 
   for (const row of element.querySelectorAll("[data-drop-actor-id]")) {
+    if (!bindOnce(row)) continue;
     row.addEventListener("dragover", (event) => {
       event.preventDefault();
       row.classList.add("gms-drop-target");
