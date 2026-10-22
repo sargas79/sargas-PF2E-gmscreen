@@ -1,0 +1,59 @@
+<div class="gms-inline-form">
+  <label>{{localize "SARGAS_GMSCREEN.Treasure.ItemLevel"}}
+    <input type="number" name="lootMinLevel" min="0" max="30" value="{{options.minLevel}}" class="gms-narrow">
+    –
+    <input type="number" name="lootMaxLevel" min="0" max="30" value="{{options.maxLevel}}" class="gms-narrow">
+  </label>
+  <select name="lootCategory" aria-label="{{localize 'SARGAS_GMSCREEN.Treasure.Category'}}">
+    {{selectOptions categories selected=options.category valueAttr="value" labelAttr="label"}}
+  </select>
+  <select name="lootRarity" aria-label="{{localize 'SARGAS_GMSCREEN.Rules.Rarity'}}">
+    {{selectOptions rarities selected=options.rarity valueAttr="value" labelAttr="label"}}
+  </select>
+  <input type="text" name="lootTraits" value="{{options.traits}}" placeholder="{{localize 'SARGAS_GMSCREEN.Treasure.Traits'}}"
+    aria-label="{{localize 'SARGAS_GMSCREEN.Treasure.Traits'}}">
+  <label>{{localize "SARGAS_GMSCREEN.Treasure.Count"}}
+    <input type="number" name="lootCount" min="1" max="20" value="{{options.count}}" class="gms-narrow">
+  </label>
+  <button type="button" data-action="rollLoot"><i class="fa-solid fa-dice" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.Roll"}}</button>
+</div>
+
+{{#if results.length}}
+<table>
+  <thead>
+    <tr>
+      <th>{{localize "SARGAS_GMSCREEN.Treasure.Item"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Rules.Level"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Rules.Rarity"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Treasure.Price"}}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each results}}
+    <tr data-search="{{name}}">
+      <td>{{{link}}}</td>
+      <td>{{level}}</td>
+      <td>{{rarityLabel}}</td>
+      <td>{{priceLabel}}</td>
+      <td>
+        <button type="button" class="icon fa-solid fa-rotate" data-action="rerollLoot" data-index="{{index}}"
+          data-tooltip="SARGAS_GMSCREEN.Treasure.Reroll" aria-label="{{localize 'SARGAS_GMSCREEN.Treasure.Reroll'}}"></button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<div class="gms-inline-form">
+  <select name="lootVisibility" aria-label="{{localize 'SARGAS_GMSCREEN.Treasure.Visibility'}}">
+    <option value="gm">{{localize "SARGAS_GMSCREEN.Treasure.GmOnly"}}</option>
+    <option value="public">{{localize "SARGAS_GMSCREEN.Treasure.Public"}}</option>
+  </select>
+  <button type="button" data-action="postLoot"><i class="fa-solid fa-comment" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.PostToChat"}}</button>
+  <button type="button" data-action="stashLoot" {{disabled (not hasParty)}}><i class="fa-solid fa-box-open" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.AddToStash"}}</button>
+  <button type="button" data-action="clearLoot"><i class="fa-solid fa-eraser" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.Clear"}}</button>
+</div>
+{{#unless hasParty}}<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.NoPartyActor"}}</p>{{/unless}}
+{{else}}
+<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.LootHint"}}</p>
+{{/if}}

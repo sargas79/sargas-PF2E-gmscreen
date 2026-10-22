@@ -1,0 +1,25 @@
+<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.ByLevelHint"}}</p>
+<table>
+  <thead>
+    <tr>
+      <th>{{localize "SARGAS_GMSCREEN.Rules.Level"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Treasure.Total"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Treasure.Categories.permanent"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Treasure.Categories.consumable"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Treasure.Categories.currency"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Treasure.PerExtraPc"}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each rows}}
+    <tr{{#if highlight}} class="highlight"{{/if}} data-search="{{level}}">
+      <td>{{level}}</td>
+      <td>{{numberFormat total}} gp</td>
+      <td>{{permanent}}</td>
+      <td>{{consumables}}</td>
+      <td>{{numberFormat currency}} gp</td>
+      <td>{{numberFormat perExtraPc}} gp</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

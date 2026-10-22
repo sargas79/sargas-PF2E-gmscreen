@@ -1,0 +1,10 @@
+<p>{{localize "SARGAS_GMSCREEN.Rules.RecallKnowledge.dc"}}</p>
+<table>
+  <thead><tr><th>{{localize "SARGAS_GMSCREEN.Rules.RecallKnowledge.trait"}}</th><th>{{localize "SARGAS_GMSCREEN.Rules.RecallKnowledge.skill"}}</th></tr></thead>
+  <tbody>
+    {{#each traits}}
+    <tr data-search="{{trait}} {{skills}}"><td>{{trait}}</td><td>{{skills}}</td></tr>
+    {{/each}}
+  </tbody>
+</table>
+<p class="gms-muted">{{{link}}}</p>

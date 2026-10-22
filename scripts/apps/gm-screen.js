@@ -1,6 +1,8 @@
 import { I18N, MODULE_ID } from "../constants.js";
 import { SETTINGS, getSetting, setSetting } from "../settings.js";
 import { TABS } from "../tabs/index.js";
+import { bindOnce } from "../util/dom.js";
+import { getPartyLevel } from "../util/pf2e.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const { renderTemplate } = foundry.applications.handlebars;
@@ -64,6 +66,14 @@ export class GMScreen extends HandlebarsApplicationMixin(ApplicationV2) {
   /** Current search text; kept across re-renders but not saved. */
   #query = "";
 
+  /** Cards from the last render of each tab, so a partial render only rebuilds the tabs it touches. */
+  #cardsByTab = {};
+
+  /** Average level of the PCs on the Party tab; used to highlight table rows. */
+  get partyLevel() {
+    return getPartyLevel();
+  }
+
   #saveWindowState = foundry.utils.debounce((state) => setSetting(SETTINGS.windowState, state), 500);
 
   async _prepareContext(options) {
@@ -71,9 +81,10 @@ export class GMScreen extends HandlebarsApplicationMixin(ApplicationV2) {
     const pinned = new Set(getSetting(SETTINGS.pinnedCards));
     const collapsed = new Set(getSetting(SETTINGS.collapsedCards));
 
-    const cardsByTab = {};
+    const cardsByTab = this.#cardsByTab;
+    const parts = options.parts ?? TABS.map((t) => t.id);
     await Promise.all(
-      TABS.map(async (tab) => {
+      TABS.filter((tab) => parts.includes(tab.id) || !cardsByTab[tab.id]).map(async (tab) => {
         const cards = await tab.prepareCards(this);
         cardsByTab[tab.id] = await Promise.all(
           cards.map(async (card) => {
@@ -108,10 +119,12 @@ export class GMScreen extends HandlebarsApplicationMixin(ApplicationV2) {
   _onRender(context, options) {
     super._onRender(context, options);
     const search = this.element.querySelector("input[name=search]");
-    search?.addEventListener("input", (event) => {
-      this.#query = event.currentTarget.value;
-      this.#applySearch();
-    });
+    if (search && bindOnce(search)) {
+      search.addEventListener("input", (event) => {
+        this.#query = event.currentTarget.value;
+        this.#applySearch();
+      });
+    }
     this.#applySearch();
     for (const tab of TABS) tab.onRender?.(this, this.element);
   }

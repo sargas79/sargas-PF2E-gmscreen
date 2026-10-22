@@ -1,0 +1,17 @@
+{{#if size}}
+<p>{{localize "SARGAS_GMSCREEN.Party.LevelAndSize" level=level size=size}}</p>
+<table>
+  <thead><tr><th>{{localize "SARGAS_GMSCREEN.Party.Lowest"}}</th><th></th><th></th></tr></thead>
+  <tbody>
+    {{#each stats}}
+    <tr>
+      <td>{{localize label}}</td>
+      <td>{{#if signed}}{{numberFormat value sign=true}}{{else}}{{value}}{{/if}}</td>
+      <td class="gms-muted">{{name}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+<p>{{localize "SARGAS_GMSCREEN.Party.Empty"}}</p>
+{{/if}}
