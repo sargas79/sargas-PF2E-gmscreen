@@ -6,6 +6,7 @@ export const SETTINGS = {
   pinnedCards: "pinnedCards",
   collapsedCards: "collapsedCards",
   notes: "notes",
+  partyOverride: "partyOverride",
 };
 
 export function registerSettings() {
@@ -45,6 +46,14 @@ export function registerSettings() {
     config: false,
     type: String,
     default: "",
+  });
+
+  // Actor ids shown on the Party tab instead of the Party actor's members; empty = automatic.
+  game.settings.register(MODULE_ID, SETTINGS.partyOverride, {
+    scope: "world",
+    config: false,
+    type: Array,
+    default: [],
   });
 }
 

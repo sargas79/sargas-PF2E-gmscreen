@@ -109,6 +109,47 @@
         "trait": "Creature trait",
         "skill": "Skill"
       }
+    },
+    "Party": {
+      "Cards": {
+        "roster": "Party",
+        "summary": "Party at a Glance",
+        "secret-checks": "Secret Checks",
+        "members": "Who's Shown"
+      },
+      "Columns": {
+        "character": "Character",
+        "hp": "HP",
+        "dcs": "DCs",
+        "heroPoints": "Hero",
+        "conditions": "Conditions"
+      },
+      "Stats": {
+        "ac": "AC",
+        "fortitude": "Fort",
+        "reflex": "Ref",
+        "will": "Will",
+        "perception": "Perception"
+      },
+      "RosterHint": "Drop a condition or effect on a row to apply it. Click a condition to lower it (Shift-click removes it). Shift-click HP buttons for ±10.",
+      "Empty": "No characters to show. Create a Party actor, or pick characters under \"Who's Shown\".",
+      "NoCandidates": "There are no player-owned characters in this world yet.",
+      "HpMinus": "Lose HP (Shift: 10)",
+      "HpPlus": "Gain HP (Shift: 10)",
+      "OpenSheet": "Open character sheet",
+      "Ping": "Pan to and ping token",
+      "NoToken": "{name} has no token on the current scene.",
+      "ClassDC": "Class",
+      "SpellDC": "Spell",
+      "Lowest": "Lowest",
+      "LevelAndSize": "Party level {level} · {size} characters",
+      "SecretHint": "Rolls the check for every character as a blind GM roll; players don't see the results.",
+      "Roll": "Roll for all",
+      "Source": {
+        "override": "Showing only the characters ticked below.",
+        "partyActor": "Showing the Party actor's characters. Tick characters below to choose them yourself.",
+        "playerOwned": "Showing every player-owned character. Tick characters below to choose them yourself."
+      }
     }
   }
 }

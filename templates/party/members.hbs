@@ -1,0 +1,15 @@
+<p class="gms-muted">{{localize (concat "SARGAS_GMSCREEN.Party.Source." source)}}</p>
+{{#if candidates.length}}
+<ul class="gms-list">
+  {{#each candidates}}
+  <li data-search="{{name}}">
+    <label>
+      <input type="checkbox" data-action="toggleMember" data-member-id="{{id}}" {{checked checked}}>
+      {{name}}
+    </label>
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+<p>{{localize "SARGAS_GMSCREEN.Party.NoCandidates"}}</p>
+{{/if}}
