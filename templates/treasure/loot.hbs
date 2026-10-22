@@ -53,7 +53,7 @@
   <button type="button" data-action="stashLoot" {{disabled (not hasParty)}}><i class="fa-solid fa-box-open" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.AddToStash"}}</button>
   <button type="button" data-action="clearLoot"><i class="fa-solid fa-eraser" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.Clear"}}</button>
 </div>
-{{#unless hasParty}}<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.NoPartyActor"}}</p>{{/unless}}
+{{#unless hasParty}}<p class="gms-hint">{{localize "SARGAS_GMSCREEN.Treasure.NoPartyActor"}}</p>{{/unless}}
 {{else}}
-<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.LootHint"}}</p>
+<p class="gms-hint">{{localize "SARGAS_GMSCREEN.Treasure.LootHint"}}</p>
 {{/if}}

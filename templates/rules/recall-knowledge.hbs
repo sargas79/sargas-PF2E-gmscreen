@@ -1,10 +1,7 @@
-<p>{{localize "SARGAS_GMSCREEN.Rules.RecallKnowledge.dc"}}</p>
-<table>
-  <thead><tr><th>{{localize "SARGAS_GMSCREEN.Rules.RecallKnowledge.trait"}}</th><th>{{localize "SARGAS_GMSCREEN.Rules.RecallKnowledge.skill"}}</th></tr></thead>
-  <tbody>
-    {{#each traits}}
-    <tr data-search="{{trait}} {{skills}}"><td>{{trait}}</td><td>{{skills}}</td></tr>
-    {{/each}}
-  </tbody>
-</table>
-<p class="gms-muted">{{{link}}}</p>
+<p class="gms-hint">{{localize "SARGAS_GMSCREEN.Rules.RecallKnowledge.dc"}}</p>
+<ul class="gms-pairs">
+  {{#each traits}}
+  <li data-search="{{trait}} {{skills}}"><span>{{trait}}</span><span>{{skills}}</span></li>
+  {{/each}}
+</ul>
+<footer class="gms-card-links">{{{link}}}</footer>

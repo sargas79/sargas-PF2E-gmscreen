@@ -1,26 +1,29 @@
 <div class="gms-inline-form">
   <label>{{localize "SARGAS_GMSCREEN.Rules.Level"}}
-    <select name="budgetLevel">
+    <select name="budgetLevel" class="gms-narrow">
       {{#each levels}}<option value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>{{/each}}
     </select>
   </label>
-  <span class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.PartySize" size=partySize}}</span>
+  <span class="gms-muted gms-push-right">{{localize "SARGAS_GMSCREEN.Treasure.PartySize" size=partySize}}</span>
 </div>
-<p>
-  {{localize "SARGAS_GMSCREEN.Treasure.Given" given=(numberFormat given) budget=(numberFormat budget)}}
-  {{#if over}}<strong class="gms-warning">{{localize "SARGAS_GMSCREEN.Treasure.OverBudget"}}</strong>
-  {{else}}<span class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.Remaining" remaining=(numberFormat remaining)}}</span>{{/if}}
-</p>
-<div class="gms-hp-bar" role="meter" aria-valuemin="0" aria-valuemax="{{budget}}" aria-valuenow="{{given}}"><span style="width: {{percent}}%"></span></div>
-<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.CurrencyShare" currency=(numberFormat currency)}}</p>
+<div>
+  <div class="gms-inline-form">
+    <span>{{localize "SARGAS_GMSCREEN.Treasure.Given" given=(numberFormat given) budget=(numberFormat budget)}}</span>
+    {{#if over}}<strong class="gms-warning gms-push-right">{{localize "SARGAS_GMSCREEN.Treasure.OverBudget"}}</strong>
+    {{else}}<span class="gms-muted gms-push-right">{{localize "SARGAS_GMSCREEN.Treasure.Remaining" remaining=(numberFormat remaining)}}</span>{{/if}}
+  </div>
+  <div class="gms-bar{{#if over}} low{{/if}}" role="meter" aria-valuemin="0" aria-valuemax="{{budget}}" aria-valuenow="{{given}}"><span style="width: {{percent}}%"></span></div>
+</div>
+<p class="gms-hint">{{localize "SARGAS_GMSCREEN.Treasure.CurrencyShare" currency=(numberFormat currency)}}</p>
 
 {{#if entries.length}}
 <ul class="gms-list">
   {{#each entries}}
   <li data-search="{{label}}">
     <span>{{label}}</span>
-    <span class="gms-muted">{{kindLabel}} · {{value}} gp</span>
-    <button type="button" class="icon fa-solid fa-xmark gms-push-right" data-action="removeLogEntry" data-entry-id="{{id}}"
+    <span class="gms-muted gms-push-right">{{kindLabel}}</span>
+    <span class="num">{{value}} gp</span>
+    <button type="button" class="icon fa-solid fa-xmark" data-action="removeLogEntry" data-entry-id="{{id}}"
       data-tooltip="SARGAS_GMSCREEN.Treasure.RemoveEntry" aria-label="{{localize 'SARGAS_GMSCREEN.Treasure.RemoveEntry'}}"></button>
   </li>
   {{/each}}
@@ -35,4 +38,4 @@
   </select>
   <button type="button" data-action="addLogEntry"><i class="fa-solid fa-plus" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.Log"}}</button>
 </div>
-<p class="gms-muted">{{localize (concat "SARGAS_GMSCREEN.Treasure.Storage." storage)}}</p>
+<p class="gms-hint">{{localize (concat "SARGAS_GMSCREEN.Treasure.Storage." storage)}}</p>

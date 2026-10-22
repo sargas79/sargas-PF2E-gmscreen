@@ -1,10 +1,19 @@
 /* Sargas PF2e GM Screen. Uses Foundry's theme variables so light and dark both work. */
 
+.sargas-pf2e-gmscreen {
+  --gms-gap: 0.4rem;
+  --gms-radius: 4px;
+  --gms-card-bg: var(--color-cool-5-50, rgb(0 0 0 / 5%));
+  --gms-chip-bg: rgb(128 128 128 / 12%);
+  --gms-highlight: var(--color-warm-3, rgb(255 200 0 / 18%));
+  --gms-accent: var(--color-border-highlight, #c9593f);
+}
+
 .sargas-pf2e-gmscreen .window-content {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem;
+  gap: var(--gms-gap);
+  padding: var(--gms-gap);
   overflow: hidden;
 }
 
@@ -13,49 +22,77 @@
 .sargas-pf2e-gmscreen .gms-toolbar {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--gms-gap);
   flex: none;
 }
 
 .sargas-pf2e-gmscreen .gms-search {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .sargas-pf2e-gmscreen .gms-search input {
   flex: 1;
+  height: 1.7rem;
 }
 
-.sargas-pf2e-gmscreen .gms-pinned {
-  max-height: 40%;
+/* A plain grid: packed columns inside a height-capped box would split cards sideways. */
+.sargas-pf2e-gmscreen .gms-cards.gms-pinned {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  align-items: start;
+  gap: var(--gms-gap);
+  columns: auto;
+  max-height: 40vh;
   overflow-y: auto;
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--gms-gap);
   border-bottom: 1px solid var(--color-border);
 }
 
-/* ---------- Tabs & cards ---------- */
+.sargas-pf2e-gmscreen .gms-pinned .gms-card {
+  margin: 0;
+}
+
+.sargas-pf2e-gmscreen .gms-pinned .gms-card.gms-wide {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Tabs & card layout ---------- */
 
 .sargas-pf2e-gmscreen .gms-tab.active {
   flex: 1;
   overflow-y: auto;
+  padding-right: 2px;
 }
 
+/* Cards flow down packed columns, so short cards don't leave holes next to tall ones. */
 .sargas-pf2e-gmscreen .gms-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 0.5rem;
-  align-items: start;
+  columns: 300px auto;
+  column-gap: var(--gms-gap);
+}
+
+/* Treasure cards hold wider tables. */
+.sargas-pf2e-gmscreen .gms-tab[data-tab="treasure"] .gms-cards {
+  columns: 440px auto;
 }
 
 .sargas-pf2e-gmscreen .gms-card {
+  display: block;
+  width: 100%;
+  margin: 0 0 var(--gms-gap);
+  break-inside: avoid;
   border: 1px solid var(--color-border);
-  border-radius: 6px;
-  background: var(--color-cool-5-50, rgb(0 0 0 / 5%));
+  border-radius: var(--gms-radius);
+  background: var(--gms-card-bg);
+}
+
+.sargas-pf2e-gmscreen .gms-card.gms-wide {
+  column-span: all;
 }
 
 .sargas-pf2e-gmscreen .gms-card.pinned {
-  border-color: var(--color-warm-2, var(--color-border-highlight));
+  border-color: var(--gms-accent);
 }
 
 .sargas-pf2e-gmscreen .gms-card[hidden],
@@ -66,61 +103,229 @@
 .sargas-pf2e-gmscreen .gms-card-header {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.5rem;
+  gap: 0.35rem;
+  padding: 0.15rem 0.25rem 0.15rem 0.45rem;
   border-bottom: 1px solid var(--color-border);
+  background: rgb(128 128 128 / 8%);
+  border-radius: var(--gms-radius) var(--gms-radius) 0 0;
 }
 
 .sargas-pf2e-gmscreen .gms-card.collapsed .gms-card-header {
   border-bottom: none;
+  border-radius: var(--gms-radius);
+}
+
+.sargas-pf2e-gmscreen .gms-card-header > i {
+  width: 1rem;
+  text-align: center;
+  opacity: 0.8;
 }
 
 .sargas-pf2e-gmscreen .gms-card-title {
   flex: 1;
   margin: 0;
   border: none;
-  font-size: var(--font-size-14);
+  font-size: var(--font-size-13);
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .sargas-pf2e-gmscreen .gms-card-header button.icon {
   flex: none;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.4rem;
+  height: 1.4rem;
   min-height: 0;
   padding: 0;
+  font-size: var(--font-size-11);
+  border: none;
+  background: none;
+  opacity: 0.5;
+}
+
+.sargas-pf2e-gmscreen .gms-card-header button.icon:hover,
+.sargas-pf2e-gmscreen .gms-card.pinned .gms-pin {
+  opacity: 1;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.35rem 0.45rem 0.4rem;
   font-size: var(--font-size-12);
+  line-height: 1.35;
+  overflow-x: auto;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body p,
+.sargas-pf2e-gmscreen .gms-card-body ul,
+.sargas-pf2e-gmscreen .gms-card-body table {
+  margin: 0;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body h4 {
+  margin: 0;
+  border: none;
+  font-size: var(--font-size-12);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.sargas-pf2e-gmscreen .gms-card-body ul:not(.gms-list, .gms-chips) {
+  padding-left: 1rem;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body li + li {
+  margin-top: 0.15rem;
+}
+
+/* ---------- Tables ---------- */
+
+.sargas-pf2e-gmscreen .gms-card-body table {
+  width: 100%;
+  border-collapse: collapse;
   border: none;
   background: none;
 }
 
-.sargas-pf2e-gmscreen .gms-card:not(.pinned) .gms-pin {
-  opacity: 0.4;
-}
-
-.sargas-pf2e-gmscreen .gms-card-body {
-  padding: 0.5rem;
-  font-size: var(--font-size-13);
-}
-
-.sargas-pf2e-gmscreen .gms-card-body p {
-  margin: 0 0 0.4rem;
-}
-
-.sargas-pf2e-gmscreen .gms-card-body table {
-  width: 100%;
-  margin: 0;
-  border-collapse: collapse;
+.sargas-pf2e-gmscreen .gms-card-body thead th {
+  font-size: var(--font-size-11);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-secondary);
 }
 
 .sargas-pf2e-gmscreen .gms-card-body th,
 .sargas-pf2e-gmscreen .gms-card-body td {
-  padding: 0.15rem 0.3rem;
+  padding: 0.1rem 0.35rem;
   text-align: left;
+  vertical-align: middle;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body tbody th {
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .sargas-pf2e-gmscreen .gms-card-body tr.highlight {
-  background: var(--color-warm-3, rgb(255 200 0 / 15%));
-  font-weight: bold;
+  background: var(--gms-highlight);
+  font-weight: 600;
+}
+
+/* ---------- Chips & compact grids ---------- */
+
+.sargas-pf2e-gmscreen .gms-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sargas-pf2e-gmscreen .gms-chips > li {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+}
+
+.sargas-pf2e-gmscreen .gms-chips .content-link {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.sargas-pf2e-gmscreen .gms-badge {
+  padding: 0 3px;
+  border-radius: 3px;
+  background: var(--gms-chip-bg);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-10);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Level → DC lookup: one small tile per level. */
+.sargas-pf2e-gmscreen .gms-dc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
+  gap: 2px;
+}
+
+.sargas-pf2e-gmscreen .gms-dc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1px 0;
+  border-radius: 3px;
+  background: var(--gms-chip-bg);
+  line-height: 1.15;
+}
+
+.sargas-pf2e-gmscreen .gms-dc span {
+  font-size: var(--font-size-10);
+  color: var(--color-text-secondary);
+}
+
+.sargas-pf2e-gmscreen .gms-dc strong {
+  font-size: var(--font-size-13);
+  font-variant-numeric: tabular-nums;
+}
+
+.sargas-pf2e-gmscreen .gms-dc.highlight {
+  background: var(--gms-highlight);
+  outline: 1px solid var(--gms-accent);
+}
+
+/* Label/value pairs that wrap into as many columns as fit. */
+.sargas-pf2e-gmscreen .gms-pairs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 1px 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sargas-pf2e-gmscreen .gms-pairs > li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 1px 0;
+  border-bottom: 1px dotted var(--color-border);
+}
+
+.sargas-pf2e-gmscreen .gms-pairs > li > :last-child {
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.sargas-pf2e-gmscreen .gms-group + .gms-group {
+  margin-top: 0.15rem;
+}
+
+.sargas-pf2e-gmscreen .gms-group h4 {
+  margin-bottom: 0.15rem;
+}
+
+/* ---------- Shared bits ---------- */
+
+.sargas-pf2e-gmscreen .gms-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 3px;
+  font-size: var(--font-size-11);
 }
 
 .sargas-pf2e-gmscreen .gms-list {
@@ -131,18 +336,24 @@
 
 .sargas-pf2e-gmscreen .gms-list li {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.4rem;
-  padding: 0.1rem 0;
+  margin: 0;
+  padding: 1px 0;
 }
 
-.sargas-pf2e-gmscreen .gms-muted {
+.sargas-pf2e-gmscreen .gms-list li button.icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  min-height: 0;
+  padding: 0;
+  font-size: var(--font-size-10);
+}
+
+.sargas-pf2e-gmscreen .gms-muted,
+.sargas-pf2e-gmscreen .gms-hint {
   color: var(--color-text-secondary);
-  font-size: var(--font-size-12);
-}
-
-.sargas-pf2e-gmscreen .gms-wide {
-  grid-column: 1 / -1;
+  font-size: var(--font-size-11);
 }
 
 .sargas-pf2e-gmscreen .gms-warning {
@@ -153,90 +364,146 @@
   white-space: nowrap;
 }
 
-.sargas-pf2e-gmscreen .gms-columns {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0.5rem;
+.sargas-pf2e-gmscreen .gms-push-right {
+  margin-left: auto;
 }
 
-.sargas-pf2e-gmscreen .gms-two-columns {
-  columns: 2 280px;
-  column-gap: 1rem;
+.sargas-pf2e-gmscreen .gms-bar {
+  height: 5px;
+  border-radius: 3px;
+  background: rgb(128 128 128 / 30%);
+  overflow: hidden;
 }
 
-.sargas-pf2e-gmscreen .gms-two-columns li {
-  break-inside: avoid;
+.sargas-pf2e-gmscreen .gms-bar span {
+  display: block;
+  height: 100%;
+  background: var(--color-level-success, #3c9a3c);
 }
 
-.sargas-pf2e-gmscreen .gms-card-body h4 {
-  margin: 0.4rem 0 0.2rem;
-  border: none;
-  font-size: var(--font-size-13);
+.sargas-pf2e-gmscreen .gms-bar.low span {
+  background: var(--color-level-error, #b33);
 }
 
-.sargas-pf2e-gmscreen .gms-card-body ul:not(.gms-list) {
-  margin: 0;
-  padding-left: 1.1rem;
+.sargas-pf2e-gmscreen .gms-bar.mid span {
+  background: var(--color-level-warning, #c90);
+}
+
+/* ---------- Forms ---------- */
+
+.sargas-pf2e-gmscreen .gms-inline-form {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.sargas-pf2e-gmscreen .gms-inline-form label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.sargas-pf2e-gmscreen .gms-inline-form select,
+.sargas-pf2e-gmscreen .gms-inline-form input[type="text"] {
+  flex: 1 1 7rem;
+  min-width: 0;
+}
+
+.sargas-pf2e-gmscreen .gms-inline-form input,
+.sargas-pf2e-gmscreen .gms-inline-form select,
+.sargas-pf2e-gmscreen .gms-inline-form button {
+  height: 1.65rem;
+  font-size: var(--font-size-12);
+}
+
+.sargas-pf2e-gmscreen .gms-inline-form button {
+  flex: none;
+  width: auto;
+  padding: 0 0.5rem;
+}
+
+.sargas-pf2e-gmscreen input.gms-narrow {
+  width: 3.6rem;
+  flex: none;
+}
+
+.sargas-pf2e-gmscreen textarea[name="gmNotes"] {
+  width: 100%;
+  min-height: 5rem;
+  resize: vertical;
+  font-size: var(--font-size-12);
 }
 
 /* ---------- Party ---------- */
 
 .sargas-pf2e-gmscreen .gms-roster td {
-  vertical-align: middle;
+  padding-block: 0.25rem;
 }
 
 .sargas-pf2e-gmscreen .gms-roster tr.gms-drop-target {
-  outline: 2px dashed var(--color-border-highlight, orange);
+  outline: 2px dashed var(--gms-accent);
+  outline-offset: -2px;
 }
 
 .sargas-pf2e-gmscreen .gms-who {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  min-width: 10rem;
+  min-width: 11rem;
 }
 
 .sargas-pf2e-gmscreen .gms-who img {
   flex: none;
+  width: 34px;
+  height: 34px;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--gms-radius);
   object-fit: cover;
 }
 
-.sargas-pf2e-gmscreen .gms-hp {
-  min-width: 7rem;
+.sargas-pf2e-gmscreen .gms-who strong {
+  font-size: var(--font-size-13);
 }
 
-.sargas-pf2e-gmscreen .gms-hp-bar {
-  height: 6px;
-  border-radius: 3px;
-  background: rgb(128 128 128 / 30%);
-  overflow: hidden;
+.sargas-pf2e-gmscreen .gms-roster .gms-hp {
+  width: 9.5rem;
 }
 
-.sargas-pf2e-gmscreen .gms-hp-bar span {
-  display: block;
-  height: 100%;
-  background: var(--color-level-success, #3c9a3c);
+/* Spare width goes to conditions, where icons can wrap, rather than stretching the numbers apart. */
+.sargas-pf2e-gmscreen .gms-roster .gms-conditions-col {
+  width: 35%;
 }
 
 .sargas-pf2e-gmscreen .gms-hp-controls,
 .sargas-pf2e-gmscreen .gms-row-actions,
-.sargas-pf2e-gmscreen .gms-conditions,
-.sargas-pf2e-gmscreen .gms-inline-form {
+.sargas-pf2e-gmscreen .gms-conditions {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
   flex-wrap: wrap;
+}
+
+.sargas-pf2e-gmscreen .gms-hp-controls {
+  justify-content: space-between;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
 }
 
 .sargas-pf2e-gmscreen .gms-hp-controls button.icon,
 .sargas-pf2e-gmscreen .gms-row-actions button.icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
   min-height: 0;
   padding: 0;
-  font-size: var(--font-size-11);
+  font-size: var(--font-size-10);
+}
+
+.sargas-pf2e-gmscreen .gms-stat {
+  font-size: var(--font-size-14);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .sargas-pf2e-gmscreen button.gms-condition {
@@ -250,13 +517,16 @@
 }
 
 .sargas-pf2e-gmscreen button.gms-condition img {
+  display: block;
+  width: 22px;
+  height: 22px;
   border: none;
 }
 
 .sargas-pf2e-gmscreen button.gms-condition span {
   position: absolute;
-  right: -2px;
-  bottom: -2px;
+  right: -3px;
+  bottom: -3px;
   padding: 0 2px;
   border-radius: 3px;
   background: var(--color-text-primary, black);
@@ -265,39 +535,6 @@
   line-height: 1.1;
 }
 
-.sargas-pf2e-gmscreen .gms-inline-form select {
-  flex: 1;
-}
-
-.sargas-pf2e-gmscreen .gms-inline-form {
-  margin-bottom: 0.4rem;
-}
-
-.sargas-pf2e-gmscreen .gms-inline-form label {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+.sargas-pf2e-gmscreen .gms-dcs div {
   white-space: nowrap;
-}
-
-.sargas-pf2e-gmscreen input.gms-narrow {
-  width: 4.5rem;
-  flex: none;
-}
-
-.sargas-pf2e-gmscreen .gms-push-right {
-  margin-left: auto;
-}
-
-.sargas-pf2e-gmscreen .gms-list li button.icon {
-  width: 1.4rem;
-  height: 1.4rem;
-  min-height: 0;
-  padding: 0;
-  font-size: var(--font-size-11);
-}
-
-.sargas-pf2e-gmscreen textarea[name="gmNotes"] {
-  width: 100%;
-  resize: vertical;
 }

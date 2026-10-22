@@ -60,7 +60,6 @@ export async function prepareCards() {
     {
       id: "by-level",
       icon: "fa-solid fa-table",
-      wide: true,
       template: "by-level",
       data: {
         rows: table.map((row) => ({
@@ -80,7 +79,6 @@ export async function prepareCards() {
     {
       id: "loot",
       icon: "fa-solid fa-dice",
-      wide: true,
       template: "loot",
       data: {
         options,
@@ -357,7 +355,7 @@ async function onStashCoins(event, target) {
 /* -------------------------------------------- */
 
 function formatItemCounts(pairs) {
-  return pairs.map(([level, count]) => `${count}× ${level}`).join(", ");
+  return pairs.map(([level, count]) => `${count}×${level}`).join(" ");
 }
 
 function sample(array, count) {

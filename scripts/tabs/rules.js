@@ -41,10 +41,7 @@ export async function prepareCards(app) {
       icon: "fa-solid fa-stairs",
       template: "dcs-by-level",
       data: {
-        columns: chunk(
-          dcsByLevel.map((row) => ({ ...row, highlight: row.level === partyLevel })),
-          Math.ceil(dcsByLevel.length / 3),
-        ),
+        rows: dcsByLevel.map((row) => ({ ...row, highlight: row.level === partyLevel })),
         link: await fullRules("dcsByLevel"),
       },
     },
@@ -198,10 +195,4 @@ function localizeConfig(group, key) {
   const label = CONFIG.PF2E?.[group]?.[key];
   const resolved = typeof label === "string" ? label : label?.label;
   return resolved ? game.i18n.localize(resolved) : key.charAt(0).toUpperCase() + key.slice(1);
-}
-
-function chunk(array, size) {
-  const chunks = [];
-  for (let i = 0; i < array.length; i += size) chunks.push(array.slice(i, i + size));
-  return chunks;
 }
