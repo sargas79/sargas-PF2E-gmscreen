@@ -118,6 +118,56 @@ export async function applyItem(actor, item) {
   return null;
 }
 
+/** Item types from `pf2e.equipment-srd`, grouped the way the loot roller filters them. */
+export const LOOT_CATEGORIES = {
+  permanent: ["weapon", "armor", "shield", "equipment", "backpack"],
+  consumable: ["consumable", "ammo"],
+  treasure: ["treasure"],
+};
+
+export const LOOT_INDEX_FIELDS = [
+  "type",
+  "system.level.value",
+  "system.price.value",
+  "system.traits.rarity",
+  "system.traits.value",
+];
+
+/** Normalize a `pf2e.equipment-srd` index entry. */
+export function summarizeLootEntry(entry) {
+  const price = entry.system?.price?.value ?? {};
+  const category = Object.entries(LOOT_CATEGORIES).find(([, types]) => types.includes(entry.type))?.[0] ?? null;
+  return {
+    uuid: entry.uuid,
+    name: entry.name,
+    type: entry.type,
+    category,
+    level: entry.system?.level?.value ?? 0,
+    rarity: entry.system?.traits?.rarity ?? "common",
+    traits: entry.system?.traits?.value ?? [],
+    price,
+    priceGp: coinsToGp(price),
+  };
+}
+
+export function coinsToGp({ pp = 0, gp = 0, sp = 0, cp = 0 } = {}) {
+  return pp * 10 + gp + sp / 10 + cp / 100;
+}
+
+export function formatCoins({ pp = 0, gp = 0, sp = 0, cp = 0 } = {}) {
+  const parts = [
+    [pp, "pp"],
+    [gp, "gp"],
+    [sp, "sp"],
+    [cp, "cp"],
+  ].filter(([n]) => n);
+  return parts.length ? parts.map(([n, unit]) => `${n.toLocaleString(game.i18n.lang)} ${unit}`).join(" ") : "—";
+}
+
+export function addCoins(actor, coins) {
+  return actor.inventory.addCoins(coins);
+}
+
 export function decreaseCondition(actor, conditionId, { remove = false } = {}) {
   const condition = actor.items.get(conditionId);
   if (!condition) return null;
