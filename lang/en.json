@@ -1,0 +1,216 @@
+{
+  "SARGAS_GMSCREEN": {
+    "Title": "GM Screen",
+    "Search": "Search cards…",
+    "Tabs": {
+      "rules": "Rules",
+      "party": "Party",
+      "treasure": "Treasure"
+    },
+    "Card": {
+      "Pin": "Pin to top",
+      "Unpin": "Unpin",
+      "Collapse": "Collapse",
+      "Expand": "Expand"
+    },
+    "Controls": {
+      "Toggle": "Toggle GM Screen"
+    },
+    "Keybindings": {
+      "Toggle": {
+        "Name": "Toggle GM Screen",
+        "Hint": "Open or close the GM screen."
+      }
+    },
+    "Rules": {
+      "FullRules": "Full rules",
+      "MissingCompendium": "Couldn't find this content in the PF2e system's compendiums. Is the PF2e system up to date?",
+      "Level": "Level",
+      "DC": "DC",
+      "Proficiency": "Proficiency",
+      "Difficulty": "Difficulty",
+      "Adjustment": "Adjustment",
+      "Rarity": "Rarity",
+      "ConditionsHint": "Click to read, drag onto a token, a character sheet or a Party row to apply. X = has a value.",
+      "NotesPlaceholder": "House rules, reminders, session notes…",
+      "Cards": {
+        "dcs-by-level": "DCs by Level",
+        "dc-adjustments": "Simple DCs & Adjustments",
+        "degrees": "Degrees of Success",
+        "conditions": "Conditions",
+        "actions": "Actions",
+        "dying": "Dying, Wounded & Hero Points",
+        "environment": "Cover, Terrain, Light & Falling",
+        "recall-knowledge": "Recall Knowledge",
+        "journal": "PF2e GM Screen Journal",
+        "notes": "GM Notes"
+      },
+      "Ranks": {
+        "untrained": "Untrained",
+        "trained": "Trained",
+        "expert": "Expert",
+        "master": "Master",
+        "legendary": "Legendary"
+      },
+      "Difficulties": {
+        "incrediblyEasy": "Incredibly easy",
+        "veryEasy": "Very easy",
+        "easy": "Easy",
+        "hard": "Hard",
+        "veryHard": "Very hard",
+        "incrediblyHard": "Incredibly hard"
+      },
+      "Rarities": {
+        "uncommon": "Uncommon",
+        "rare": "Rare",
+        "unique": "Unique"
+      },
+      "Degrees": {
+        "criticalSuccess": "Critical success",
+        "criticalSuccessRule": "Meet or beat the DC by 10 or more.",
+        "success": "Success",
+        "successRule": "Meet or beat the DC.",
+        "failure": "Failure",
+        "failureRule": "Fall short of the DC.",
+        "criticalFailure": "Critical failure",
+        "criticalFailureRule": "Fall short of the DC by 10 or more.",
+        "natural": "A natural 20 improves the result by one degree; a natural 1 worsens it by one degree."
+      },
+      "ActionGroups": {
+        "basic": "Basic",
+        "skill": "Skill",
+        "exploration": "Exploration",
+        "downtime": "Downtime"
+      },
+      "Dying": {
+        "knockedOut": "At 0 HP you're unconscious with dying 1 (dying 2 from a critical hit or a critically failed save), plus your wounded value.",
+        "recovery": "Recovery check at the start of your turn: flat check DC 10 + dying value. Crit success −2 dying, success −1, failure +1, crit failure +2.",
+        "death": "You die at dying 4, reduced by your doomed value.",
+        "wounded": "Losing the dying condition gives wounded 1, or increases wounded by 1.",
+        "heroPoints": "Hero points: spend 1 to reroll a check. Spend all (at least 1) when you would die to lose dying and stay at 0 HP without increasing wounded."
+      },
+      "Environment": {
+        "cover": "Cover",
+        "lesserCover": "Lesser",
+        "lesserCoverRule": "+1 circumstance bonus to AC.",
+        "standardCover": "Standard",
+        "standardCoverRule": "+2 to AC, Reflex saves against area effects, and Stealth to Hide, Sneak or Avoid Notice. Take Cover to make it greater.",
+        "greaterCover": "Greater",
+        "greaterCoverRule": "+4 to the same checks as standard cover.",
+        "terrain": "Terrain",
+        "terrainRule": "Difficult terrain costs +5 feet per square; greater difficult terrain costs +10 feet. You can't Step into difficult terrain.",
+        "light": "Light",
+        "lightRule": "In dim light, creatures without low-light vision see others as concealed. In darkness, creatures without darkvision can't see.",
+        "falling": "Falling",
+        "fallingRule": "Take bludgeoning damage equal to half the distance fallen, and land prone. Falling into water or another soft surface reduces the effective distance."
+      },
+      "RecallKnowledge": {
+        "dc": "DC = the creature's level DC, adjusted for rarity (uncommon hard, rare very hard, unique incredibly hard).",
+        "trait": "Creature trait",
+        "skill": "Skill"
+      }
+    },
+    "Party": {
+      "Cards": {
+        "roster": "Party",
+        "summary": "Party at a Glance",
+        "secret-checks": "Secret Checks",
+        "members": "Who's Shown"
+      },
+      "Columns": {
+        "character": "Character",
+        "hp": "HP",
+        "dcs": "DCs",
+        "heroPoints": "Hero",
+        "conditions": "Conditions"
+      },
+      "Stats": {
+        "ac": "AC",
+        "fortitude": "Fort",
+        "reflex": "Ref",
+        "will": "Will",
+        "perception": "Perception"
+      },
+      "RosterHint": "Drop a condition or effect on a row to apply it. Click a condition to lower it (Shift-click removes it). Shift-click HP buttons for ±10.",
+      "Empty": "No characters to show. Create a Party actor, or pick characters under \"Who's Shown\".",
+      "NoCandidates": "There are no player-owned characters in this world yet.",
+      "HpMinus": "Lose HP (Shift: 10)",
+      "HpPlus": "Gain HP (Shift: 10)",
+      "OpenSheet": "Open character sheet",
+      "Ping": "Pan to and ping token",
+      "NoToken": "{name} has no token on the current scene.",
+      "ClassDC": "Class",
+      "SpellDC": "Spell",
+      "Lowest": "Lowest",
+      "LevelAndSize": "Party level {level} · {size} characters",
+      "SecretHint": "Rolls the check for every character as a blind GM roll; players don't see the results.",
+      "Roll": "Roll for all",
+      "Source": {
+        "override": "Showing only the characters ticked below.",
+        "partyActor": "Showing the Party actor's characters. Tick characters below to choose them yourself.",
+        "playerOwned": "Showing every player-owned character. Tick characters below to choose them yourself."
+      }
+    },
+    "Treasure": {
+      "Cards": {
+        "by-level": "Party Treasure by Level",
+        "budget": "Treasure Budget",
+        "loot": "Loot Roller",
+        "coins": "Coin Splitter"
+      },
+      "Categories": {
+        "any": "Any category",
+        "permanent": "Permanent items",
+        "consumable": "Consumables",
+        "treasure": "Treasure (gems, art)",
+        "currency": "Currency"
+      },
+      "Rarities": {
+        "any": "Any rarity",
+        "common": "Common",
+        "uncommon": "Uncommon",
+        "rare": "Rare",
+        "unique": "Unique"
+      },
+      "ByLevelHint": "Treasure for a party of four over a whole level (GM Core). Item counts are \"how many × item level\".",
+      "Total": "Total",
+      "PerExtraPc": "Per extra PC",
+      "PartySize": "{size} PCs",
+      "Given": "Given out: {given} of {budget} gp.",
+      "Remaining": "{remaining} gp left.",
+      "OverBudget": "Over budget!",
+      "CurrencyShare": "Of that, {currency} gp should be currency (adjusted for party size).",
+      "EntryLabel": "What was given",
+      "Kind": "Kind",
+      "Log": "Log",
+      "RemoveEntry": "Remove entry",
+      "InvalidEntry": "Enter a description and a value above 0 gp.",
+      "Storage": {
+        "partyActor": "Saved on the Party actor.",
+        "world": "Saved in this world (no Party actor found)."
+      },
+      "ItemLevel": "Item level",
+      "Category": "Category",
+      "Traits": "Traits (comma-separated)",
+      "Count": "How many",
+      "Roll": "Roll loot",
+      "Item": "Item",
+      "Price": "Price",
+      "Reroll": "Re-roll this item",
+      "Visibility": "Chat visibility",
+      "GmOnly": "GM only",
+      "Public": "Everyone",
+      "PostToChat": "Post to chat",
+      "AddToStash": "Add to Party stash",
+      "Clear": "Clear",
+      "LootHint": "Pick filters and roll to draw random items from the PF2e equipment compendium.",
+      "NoCandidates": "No items match those filters.",
+      "NoPartyActor": "There's no Party actor in this world to hold a stash.",
+      "Stashed": "Added {count} items to {party}.",
+      "SplitAmong": "Split among {count} PCs",
+      "CoinsLabel": "Coins",
+      "CoinsHint": "Each PC gets an equal share in gp/sp/cp; anything that doesn't divide evenly goes to the Party stash. Both buttons log the coins to the budget.",
+      "Split": "Each of {count} PCs got {share}. Left over: {remainder}."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{{#if pages}}
+<ul class="gms-list gms-two-columns">
+  {{#each pages}}
+  <li data-search="{{name}}">{{{link}}}</li>
+  {{/each}}
+</ul>
+{{else}}
+<p class="gms-warning">{{localize "SARGAS_GMSCREEN.Rules.MissingCompendium"}}</p>
+{{/if}}

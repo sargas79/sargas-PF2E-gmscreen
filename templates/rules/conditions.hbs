@@ -1,0 +1,14 @@
+{{#if conditions}}
+<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Rules.ConditionsHint"}}</p>
+<ul class="gms-list gms-two-columns">
+  {{#each conditions}}
+  <li data-search="{{name}}">
+    <span class="gms-nowrap">{{{link}}}{{#if valued}} <span class="gms-muted">X</span>{{/if}}</span>
+    <span class="gms-muted">{{summary}}</span>
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+<p class="gms-warning">{{localize "SARGAS_GMSCREEN.Rules.MissingCompendium"}}</p>
+{{/if}}
+<p class="gms-muted">{{{link}}}</p>

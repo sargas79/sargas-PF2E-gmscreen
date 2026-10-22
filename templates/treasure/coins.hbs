@@ -1,0 +1,15 @@
+<div class="gms-inline-form">
+  <label>pp <input type="number" name="coinsPp" min="0" value="0" class="gms-narrow"></label>
+  <label>gp <input type="number" name="coinsGp" min="0" value="0" class="gms-narrow"></label>
+  <label>sp <input type="number" name="coinsSp" min="0" value="0" class="gms-narrow"></label>
+  <label>cp <input type="number" name="coinsCp" min="0" value="0" class="gms-narrow"></label>
+</div>
+<div class="gms-inline-form">
+  <button type="button" data-action="splitCoins" {{disabled (not memberCount)}}>
+    <i class="fa-solid fa-divide" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.SplitAmong" count=memberCount}}
+  </button>
+  <button type="button" data-action="stashCoins" {{disabled (not hasParty)}}>
+    <i class="fa-solid fa-box-open" inert></i> {{localize "SARGAS_GMSCREEN.Treasure.AddToStash"}}
+  </button>
+</div>
+<p class="gms-muted">{{localize "SARGAS_GMSCREEN.Treasure.CoinsHint"}}</p>

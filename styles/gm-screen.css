@@ -1,0 +1,303 @@
+/* Sargas PF2e GM Screen. Uses Foundry's theme variables so light and dark both work. */
+
+.sargas-pf2e-gmscreen .window-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+/* ---------- Toolbar & pinned strip ---------- */
+
+.sargas-pf2e-gmscreen .gms-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.sargas-pf2e-gmscreen .gms-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sargas-pf2e-gmscreen .gms-search input {
+  flex: 1;
+}
+
+.sargas-pf2e-gmscreen .gms-pinned {
+  max-height: 40%;
+  overflow-y: auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Tabs & cards ---------- */
+
+.sargas-pf2e-gmscreen .gms-tab.active {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sargas-pf2e-gmscreen .gms-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.5rem;
+  align-items: start;
+}
+
+.sargas-pf2e-gmscreen .gms-card {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-cool-5-50, rgb(0 0 0 / 5%));
+}
+
+.sargas-pf2e-gmscreen .gms-card.pinned {
+  border-color: var(--color-warm-2, var(--color-border-highlight));
+}
+
+.sargas-pf2e-gmscreen .gms-card[hidden],
+.sargas-pf2e-gmscreen [data-search][hidden] {
+  display: none;
+}
+
+.sargas-pf2e-gmscreen .gms-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sargas-pf2e-gmscreen .gms-card.collapsed .gms-card-header {
+  border-bottom: none;
+}
+
+.sargas-pf2e-gmscreen .gms-card-title {
+  flex: 1;
+  margin: 0;
+  border: none;
+  font-size: var(--font-size-14);
+}
+
+.sargas-pf2e-gmscreen .gms-card-header button.icon {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  min-height: 0;
+  padding: 0;
+  font-size: var(--font-size-12);
+  border: none;
+  background: none;
+}
+
+.sargas-pf2e-gmscreen .gms-card:not(.pinned) .gms-pin {
+  opacity: 0.4;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body {
+  padding: 0.5rem;
+  font-size: var(--font-size-13);
+}
+
+.sargas-pf2e-gmscreen .gms-card-body p {
+  margin: 0 0 0.4rem;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body th,
+.sargas-pf2e-gmscreen .gms-card-body td {
+  padding: 0.15rem 0.3rem;
+  text-align: left;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body tr.highlight {
+  background: var(--color-warm-3, rgb(255 200 0 / 15%));
+  font-weight: bold;
+}
+
+.sargas-pf2e-gmscreen .gms-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sargas-pf2e-gmscreen .gms-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.1rem 0;
+}
+
+.sargas-pf2e-gmscreen .gms-muted {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-12);
+}
+
+.sargas-pf2e-gmscreen .gms-wide {
+  grid-column: 1 / -1;
+}
+
+.sargas-pf2e-gmscreen .gms-warning {
+  color: var(--color-level-warning, darkorange);
+}
+
+.sargas-pf2e-gmscreen .gms-nowrap {
+  white-space: nowrap;
+}
+
+.sargas-pf2e-gmscreen .gms-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.sargas-pf2e-gmscreen .gms-two-columns {
+  columns: 2 280px;
+  column-gap: 1rem;
+}
+
+.sargas-pf2e-gmscreen .gms-two-columns li {
+  break-inside: avoid;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body h4 {
+  margin: 0.4rem 0 0.2rem;
+  border: none;
+  font-size: var(--font-size-13);
+}
+
+.sargas-pf2e-gmscreen .gms-card-body ul:not(.gms-list) {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+/* ---------- Party ---------- */
+
+.sargas-pf2e-gmscreen .gms-roster td {
+  vertical-align: middle;
+}
+
+.sargas-pf2e-gmscreen .gms-roster tr.gms-drop-target {
+  outline: 2px dashed var(--color-border-highlight, orange);
+}
+
+.sargas-pf2e-gmscreen .gms-who {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 10rem;
+}
+
+.sargas-pf2e-gmscreen .gms-who img {
+  flex: none;
+  border: none;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.sargas-pf2e-gmscreen .gms-hp {
+  min-width: 7rem;
+}
+
+.sargas-pf2e-gmscreen .gms-hp-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(128 128 128 / 30%);
+  overflow: hidden;
+}
+
+.sargas-pf2e-gmscreen .gms-hp-bar span {
+  display: block;
+  height: 100%;
+  background: var(--color-level-success, #3c9a3c);
+}
+
+.sargas-pf2e-gmscreen .gms-hp-controls,
+.sargas-pf2e-gmscreen .gms-row-actions,
+.sargas-pf2e-gmscreen .gms-conditions,
+.sargas-pf2e-gmscreen .gms-inline-form {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.sargas-pf2e-gmscreen .gms-hp-controls button.icon,
+.sargas-pf2e-gmscreen .gms-row-actions button.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  min-height: 0;
+  padding: 0;
+  font-size: var(--font-size-11);
+}
+
+.sargas-pf2e-gmscreen button.gms-condition {
+  position: relative;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.sargas-pf2e-gmscreen button.gms-condition img {
+  border: none;
+}
+
+.sargas-pf2e-gmscreen button.gms-condition span {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  padding: 0 2px;
+  border-radius: 3px;
+  background: var(--color-text-primary, black);
+  color: var(--color-light-1, white);
+  font-size: var(--font-size-10);
+  line-height: 1.1;
+}
+
+.sargas-pf2e-gmscreen .gms-inline-form select {
+  flex: 1;
+}
+
+.sargas-pf2e-gmscreen .gms-inline-form {
+  margin-bottom: 0.4rem;
+}
+
+.sargas-pf2e-gmscreen .gms-inline-form label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.sargas-pf2e-gmscreen input.gms-narrow {
+  width: 4.5rem;
+  flex: none;
+}
+
+.sargas-pf2e-gmscreen .gms-push-right {
+  margin-left: auto;
+}
+
+.sargas-pf2e-gmscreen .gms-list li button.icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  min-height: 0;
+  padding: 0;
+  font-size: var(--font-size-11);
+}
+
+.sargas-pf2e-gmscreen textarea[name="gmNotes"] {
+  width: 100%;
+  resize: vertical;
+}

@@ -1,0 +1,23 @@
+<article class="gms-card{{#if collapsed}} collapsed{{/if}}{{#if pinned}} pinned{{/if}}{{#if wide}} gms-wide{{/if}}" data-card-key="{{key}}">
+  <header class="gms-card-header">
+    <i class="{{icon}}" inert></i>
+    <h3 class="gms-card-title">{{title}}</h3>
+    {{#if pinned}}
+    <button type="button" class="icon fa-solid fa-thumbtack gms-pin" data-action="togglePin" data-card-key="{{key}}"
+      data-tooltip="SARGAS_GMSCREEN.Card.Unpin" aria-label="{{localize 'SARGAS_GMSCREEN.Card.Unpin'}}"></button>
+    {{else}}
+    <button type="button" class="icon fa-solid fa-thumbtack gms-pin" data-action="togglePin" data-card-key="{{key}}"
+      data-tooltip="SARGAS_GMSCREEN.Card.Pin" aria-label="{{localize 'SARGAS_GMSCREEN.Card.Pin'}}"></button>
+    {{/if}}
+    {{#if collapsed}}
+    <button type="button" class="icon fa-solid fa-chevron-down" data-action="toggleCollapse" data-card-key="{{key}}"
+      data-tooltip="SARGAS_GMSCREEN.Card.Expand" aria-label="{{localize 'SARGAS_GMSCREEN.Card.Expand'}}"></button>
+    {{else}}
+    <button type="button" class="icon fa-solid fa-chevron-up" data-action="toggleCollapse" data-card-key="{{key}}"
+      data-tooltip="SARGAS_GMSCREEN.Card.Collapse" aria-label="{{localize 'SARGAS_GMSCREEN.Card.Collapse'}}"></button>
+    {{/if}}
+  </header>
+  {{#unless collapsed}}
+  <div class="gms-card-body">{{{body}}}</div>
+  {{/unless}}
+</article>
