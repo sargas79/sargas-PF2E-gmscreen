@@ -1,0 +1,17 @@
+/* Sargas PF2e GM Screen. Uses Foundry's theme variables so light and dark both work. */
+
+.sargas-pf2e-gmscreen .gm-screen-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 100%;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.sargas-pf2e-gmscreen .gm-screen-placeholder i {
+  font-size: 3rem;
+  opacity: 0.5;
+}

@@ -1,0 +1,15 @@
+{
+  "SARGAS_GMSCREEN": {
+    "Title": "GM Screen",
+    "Placeholder": "The GM screen is under construction. Tabs arrive in the next milestone.",
+    "Controls": {
+      "Toggle": "Toggle GM Screen"
+    },
+    "Keybindings": {
+      "Toggle": {
+        "Name": "Toggle GM Screen",
+        "Hint": "Open or close the GM screen."
+      }
+    }
+  }
+}
