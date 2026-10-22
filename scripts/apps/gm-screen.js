@@ -1,6 +1,7 @@
 import { I18N, MODULE_ID } from "../constants.js";
 import { SETTINGS, getSetting, setSetting } from "../settings.js";
 import { TABS } from "../tabs/index.js";
+import { bindOnce } from "../util/dom.js";
 import { getPartyLevel } from "../util/pf2e.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -118,10 +119,12 @@ export class GMScreen extends HandlebarsApplicationMixin(ApplicationV2) {
   _onRender(context, options) {
     super._onRender(context, options);
     const search = this.element.querySelector("input[name=search]");
-    search?.addEventListener("input", (event) => {
-      this.#query = event.currentTarget.value;
-      this.#applySearch();
-    });
+    if (search && bindOnce(search)) {
+      search.addEventListener("input", (event) => {
+        this.#query = event.currentTarget.value;
+        this.#applySearch();
+      });
+    }
     this.#applySearch();
     for (const tab of TABS) tab.onRender?.(this, this.element);
   }
