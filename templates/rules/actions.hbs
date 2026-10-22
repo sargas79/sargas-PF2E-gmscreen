@@ -1,0 +1,17 @@
+{{#if groups}}
+<div class="gms-columns">
+  {{#each groups}}
+  <div>
+    <h4>{{label}}</h4>
+    <ul class="gms-list">
+      {{#each actions}}
+      <li data-search="{{name}}">{{{link}}}{{#if glyph}} <span class="action-glyph">{{glyph}}</span>{{/if}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/each}}
+</div>
+{{else}}
+<p class="gms-warning">{{localize "SARGAS_GMSCREEN.Rules.MissingCompendium"}}</p>
+{{/if}}
+<p class="gms-muted">{{{link}}}</p>

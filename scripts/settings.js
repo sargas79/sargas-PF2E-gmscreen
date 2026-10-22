@@ -5,6 +5,7 @@ export const SETTINGS = {
   activeTab: "activeTab",
   pinnedCards: "pinnedCards",
   collapsedCards: "collapsedCards",
+  notes: "notes",
 };
 
 export function registerSettings() {
@@ -36,6 +37,14 @@ export function registerSettings() {
     config: false,
     type: Array,
     default: [],
+  });
+
+  // GM notes card on the Rules tab.
+  game.settings.register(MODULE_ID, SETTINGS.notes, {
+    scope: "world",
+    config: false,
+    type: String,
+    default: "",
   });
 }
 

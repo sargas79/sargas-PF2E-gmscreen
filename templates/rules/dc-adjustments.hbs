@@ -1,0 +1,27 @@
+<table>
+  <thead><tr><th>{{localize "SARGAS_GMSCREEN.Rules.Proficiency"}}</th><th>{{localize "SARGAS_GMSCREEN.Rules.DC"}}</th></tr></thead>
+  <tbody>
+    {{#each simple}}
+    <tr><td>{{localize (concat "SARGAS_GMSCREEN.Rules.Ranks." rank)}}</td><td>{{dc}}</td></tr>
+    {{/each}}
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th>{{localize "SARGAS_GMSCREEN.Rules.Difficulty"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Rules.Adjustment"}}</th>
+      <th>{{localize "SARGAS_GMSCREEN.Rules.Rarity"}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each difficulty}}
+    <tr>
+      <td>{{localize (concat "SARGAS_GMSCREEN.Rules.Difficulties." key)}}</td>
+      <td>{{numberFormat adjustment sign=true}}</td>
+      <td>{{#if rarity}}{{localize (concat "SARGAS_GMSCREEN.Rules.Rarities." rarity)}}{{/if}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<p class="gms-muted">{{#each links}}{{{this}}} {{/each}}</p>

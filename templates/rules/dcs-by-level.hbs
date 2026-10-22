@@ -1,0 +1,13 @@
+<div class="gms-columns">
+  {{#each columns}}
+  <table>
+    <thead><tr><th>{{localize "SARGAS_GMSCREEN.Rules.Level"}}</th><th>{{localize "SARGAS_GMSCREEN.Rules.DC"}}</th></tr></thead>
+    <tbody>
+      {{#each this}}
+      <tr{{#if highlight}} class="highlight"{{/if}}><td>{{level}}</td><td>{{dc}}</td></tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{/each}}
+</div>
+<p class="gms-muted">{{{link}}}</p>
