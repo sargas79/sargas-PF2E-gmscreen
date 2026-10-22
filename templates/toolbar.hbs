@@ -1,0 +1,14 @@
+<div class="gms-toolbar">
+  <div class="gms-search">
+    <i class="fa-solid fa-magnifying-glass" inert></i>
+    <input type="search" name="search" value="{{query}}" placeholder="{{localize 'SARGAS_GMSCREEN.Search'}}"
+      aria-label="{{localize 'SARGAS_GMSCREEN.Search'}}" autocomplete="off">
+  </div>
+  {{#if pinnedCards.length}}
+  <div class="gms-pinned gms-cards">
+    {{#each pinnedCards}}
+    {{{html}}}
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
