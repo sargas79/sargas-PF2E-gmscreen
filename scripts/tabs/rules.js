@@ -1,6 +1,7 @@
 import { I18N, MODULE_ID } from "../constants.js";
 import { SETTINGS, getSetting, setSetting } from "../settings.js";
 import { loadData } from "../util/data.js";
+import { bindOnce } from "../util/dom.js";
 import { GM_SCREEN_JOURNAL, enrich, getIndex, gmScreenPageUuid, summarize, uuidLink } from "../util/compendium.js";
 
 export const id = "rules";
@@ -17,6 +18,7 @@ export const actions = {};
 
 export function onRender(app, element) {
   element.querySelectorAll("textarea[name=gmNotes]").forEach((textarea) => {
+    if (!bindOnce(textarea)) return;
     textarea.addEventListener("change", (event) => setSetting(SETTINGS.notes, event.currentTarget.value));
   });
 }

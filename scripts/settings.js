@@ -6,6 +6,8 @@ export const SETTINGS = {
   pinnedCards: "pinnedCards",
   collapsedCards: "collapsedCards",
   notes: "notes",
+  partyOverride: "partyOverride",
+  treasureLog: "treasureLog",
 };
 
 export function registerSettings() {
@@ -45,6 +47,22 @@ export function registerSettings() {
     config: false,
     type: String,
     default: "",
+  });
+
+  // Actor ids shown on the Party tab instead of the Party actor's members; empty = automatic.
+  game.settings.register(MODULE_ID, SETTINGS.partyOverride, {
+    scope: "world",
+    config: false,
+    type: Array,
+    default: [],
+  });
+
+  // Treasure handed out, used when the world has no Party actor to store it on.
+  game.settings.register(MODULE_ID, SETTINGS.treasureLog, {
+    scope: "world",
+    config: false,
+    type: Array,
+    default: [],
   });
 }
 
