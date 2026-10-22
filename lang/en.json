@@ -1,7 +1,18 @@
 {
   "SARGAS_GMSCREEN": {
     "Title": "GM Screen",
-    "Placeholder": "The GM screen is under construction. Tabs arrive in the next milestone.",
+    "Search": "Search cards…",
+    "Tabs": {
+      "rules": "Rules",
+      "party": "Party",
+      "treasure": "Treasure"
+    },
+    "Card": {
+      "Pin": "Pin to top",
+      "Unpin": "Unpin",
+      "Collapse": "Collapse",
+      "Expand": "Expand"
+    },
     "Controls": {
       "Toggle": "Toggle GM Screen"
     },

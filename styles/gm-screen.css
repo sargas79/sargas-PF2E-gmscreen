@@ -1,17 +1,146 @@
 /* Sargas PF2e GM Screen. Uses Foundry's theme variables so light and dark both work. */
 
-.sargas-pf2e-gmscreen .gm-screen-placeholder {
+.sargas-pf2e-gmscreen .window-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  height: 100%;
-  color: var(--color-text-secondary);
-  text-align: center;
+  padding: 0.5rem;
+  overflow: hidden;
 }
 
-.sargas-pf2e-gmscreen .gm-screen-placeholder i {
-  font-size: 3rem;
-  opacity: 0.5;
+/* ---------- Toolbar & pinned strip ---------- */
+
+.sargas-pf2e-gmscreen .gms-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.sargas-pf2e-gmscreen .gms-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sargas-pf2e-gmscreen .gms-search input {
+  flex: 1;
+}
+
+.sargas-pf2e-gmscreen .gms-pinned {
+  max-height: 40%;
+  overflow-y: auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Tabs & cards ---------- */
+
+.sargas-pf2e-gmscreen .gms-tab.active {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sargas-pf2e-gmscreen .gms-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.5rem;
+  align-items: start;
+}
+
+.sargas-pf2e-gmscreen .gms-card {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-cool-5-50, rgb(0 0 0 / 5%));
+}
+
+.sargas-pf2e-gmscreen .gms-card.pinned {
+  border-color: var(--color-warm-2, var(--color-border-highlight));
+}
+
+.sargas-pf2e-gmscreen .gms-card[hidden],
+.sargas-pf2e-gmscreen [data-search][hidden] {
+  display: none;
+}
+
+.sargas-pf2e-gmscreen .gms-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sargas-pf2e-gmscreen .gms-card.collapsed .gms-card-header {
+  border-bottom: none;
+}
+
+.sargas-pf2e-gmscreen .gms-card-title {
+  flex: 1;
+  margin: 0;
+  border: none;
+  font-size: var(--font-size-14);
+}
+
+.sargas-pf2e-gmscreen .gms-card-header button.icon {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  min-height: 0;
+  padding: 0;
+  font-size: var(--font-size-12);
+  border: none;
+  background: none;
+}
+
+.sargas-pf2e-gmscreen .gms-card:not(.pinned) .gms-pin {
+  opacity: 0.4;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body {
+  padding: 0.5rem;
+  font-size: var(--font-size-13);
+}
+
+.sargas-pf2e-gmscreen .gms-card-body p {
+  margin: 0 0 0.4rem;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body th,
+.sargas-pf2e-gmscreen .gms-card-body td {
+  padding: 0.15rem 0.3rem;
+  text-align: left;
+}
+
+.sargas-pf2e-gmscreen .gms-card-body tr.highlight {
+  background: var(--color-warm-3, rgb(255 200 0 / 15%));
+  font-weight: bold;
+}
+
+.sargas-pf2e-gmscreen .gms-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sargas-pf2e-gmscreen .gms-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.1rem 0;
+}
+
+.sargas-pf2e-gmscreen .gms-muted {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-12);
+}
+
+.sargas-pf2e-gmscreen .gms-wide {
+  grid-column: 1 / -1;
 }
