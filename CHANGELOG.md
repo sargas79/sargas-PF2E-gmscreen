@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 (unreleased)
+## 0.1.1 (2026-10-22)
 
 - **Denser layout.** Cards now pack into columns instead of a grid, so short cards no longer leave holes next to tall ones. Full-width cards (Conditions, Actions, Party) sit at the top.
 - **Rules tab:**
