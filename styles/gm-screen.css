@@ -550,7 +550,7 @@
 }
 
 /* Still too many: let the buttons take a second row under the title. */
-.window-app:not(.minimized) .window-header.gms-header-wrap {
+.window-app .window-header.gms-header-wrap {
   flex: 0 0 auto;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -558,6 +558,6 @@
   padding-block: 5px;
 }
 
-.window-app:not(.minimized) .window-header.gms-header-wrap > .window-title {
+.window-app .window-header.gms-header-wrap > .window-title {
   flex: 1 0 100%;
 }

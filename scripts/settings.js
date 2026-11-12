@@ -74,6 +74,7 @@ export function registerSettings() {
     config: true,
     type: Boolean,
     default: true,
+    requiresReload: true,
   });
 }
 

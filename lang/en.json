@@ -25,7 +25,7 @@
     "Settings": {
       "CompactHeaders": {
         "Name": "Fit crowded sheet headers",
-        "Hint": "When a sheet's title bar has more buttons than fit, show them as icons (hover for the name) so none are cut off, Close included. Applies to sheets opened after you change this."
+        "Hint": "When a sheet's title bar has more buttons than fit, show them as icons (hover for the name) so none are cut off, Close included."
       }
     },
     "Rules": {

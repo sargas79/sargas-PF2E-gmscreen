@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.2 (2026-11-12)
 
 - **Crowded sheet headers fit.** When other modules add so many buttons to a sheet's title bar that some are cut off (Close included), the buttons now shrink to icons with the name on hover, and wrap to a second row if needed. It applies to every sheet, not only ones opened from the GM screen, and can be turned off in the module settings.
 

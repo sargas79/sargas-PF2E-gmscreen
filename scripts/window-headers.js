@@ -18,8 +18,11 @@ const LABEL = "gms-header-label";
 /** Below this width a truncated title counts as crowded out, in px. */
 const MIN_TITLE_WIDTH = 120;
 
-/** @type {WeakMap<HTMLElement, MutationObserver>} */
-const mutationObservers = new WeakMap();
+/**
+ * Headers being watched, with their application and the observer for DOM changes.
+ * @type {WeakMap<HTMLElement, {app: object, observer: MutationObserver}>}
+ */
+const watched = new WeakMap();
 
 /** Last width fitted per header, so the resize observer ignores height-only changes. */
 const fittedWidths = new WeakMap();
@@ -28,8 +31,8 @@ const fittedWidths = new WeakMap();
 const pending = new Set();
 
 const resizeObserver = new ResizeObserver((entries) => {
-  for (const { target, contentRect } of entries) {
-    if (fittedWidths.get(target) !== Math.round(contentRect.width)) schedule(target);
+  for (const { target } of entries) {
+    if (fittedWidths.get(target) !== target.clientWidth) schedule(target);
   }
 });
 
@@ -62,7 +65,7 @@ function wrapLabels(header) {
     if (!button.querySelector("i, svg, img")) continue;
     for (const node of [...button.childNodes]) {
       if (node.nodeType !== Node.TEXT_NODE || !node.textContent.trim()) continue;
-      const span = document.createElement("span");
+      const span = header.ownerDocument.createElement("span");
       span.className = LABEL;
       node.replaceWith(span);
       span.append(node);
@@ -89,17 +92,20 @@ function setTooltips(header, compact) {
 }
 
 function fit(header) {
+  // A window that is minimized, or on its way there or back, isn't at its real size. Keep the
+  // layout it had: it returns to the same width, and is fitted again once it's restored.
+  if (watched.get(header)?.app._minimized !== false) return;
+
   // Measure from the natural layout each time, so a header that has room again gets its labels back.
   header.classList.remove(COMPACT, WRAP);
-  const minimized = header.closest(".window-app")?.classList.contains("minimized");
-  const compact = !minimized && isCrowded(header);
+  const compact = isCrowded(header);
   if (compact) {
     wrapLabels(header);
     header.classList.add(COMPACT);
     if (isCrowded(header)) header.classList.add(WRAP);
   }
   setTooltips(header, compact);
-  fittedWidths.set(header, Math.round(header.clientWidth));
+  fittedWidths.set(header, header.clientWidth);
 }
 
 function headerOf(app) {
@@ -112,11 +118,13 @@ function watch(app) {
   if (!getSetting(SETTINGS.compactHeaders)) return;
   const header = headerOf(app);
   if (!header) return;
-  if (!mutationObservers.has(header)) {
-    // Modules add their buttons at any point after the window renders.
+  if (!watched.has(header)) {
     const observer = new MutationObserver(() => schedule(header));
+    // Modules add their buttons at any point after the window renders.
     observer.observe(header, { childList: true });
-    mutationObservers.set(header, observer);
+    // The window drops its "minimized" class once it's fully restored.
+    observer.observe(header.parentElement, { attributes: true, attributeFilter: ["class"] });
+    watched.set(header, { app, observer });
     resizeObserver.observe(header);
   }
   fit(header);
@@ -125,8 +133,8 @@ function watch(app) {
 function unwatch(app) {
   const header = headerOf(app);
   if (!header) return;
-  mutationObservers.get(header)?.disconnect();
-  mutationObservers.delete(header);
+  watched.get(header)?.observer.disconnect();
+  watched.delete(header);
   resizeObserver.unobserve(header);
   pending.delete(header);
 }
