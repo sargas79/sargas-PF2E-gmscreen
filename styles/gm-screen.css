@@ -538,3 +538,26 @@
 .sargas-pf2e-gmscreen .gms-dcs div {
   white-space: nowrap;
 }
+
+/* ---------------------------------------- */
+/*  Crowded sheet headers                   */
+/*  (classes set by scripts/window-headers.js) */
+/* ---------------------------------------- */
+
+/* Icons only: the label becomes the button's tooltip. */
+.window-app .window-header.gms-header-compact .gms-header-label {
+  display: none;
+}
+
+/* Still too many: let the buttons take a second row under the title. */
+.window-app:not(.minimized) .window-header.gms-header-wrap {
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  row-gap: 4px;
+  padding-block: 5px;
+}
+
+.window-app:not(.minimized) .window-header.gms-header-wrap > .window-title {
+  flex: 1 0 100%;
+}

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Crowded sheet headers fit.** When other modules add so many buttons to a sheet's title bar that some are cut off (Close included), the buttons now shrink to icons with the name on hover, and wrap to a second row if needed. It applies to every sheet, not only ones opened from the GM screen, and can be turned off in the module settings.
+
 ## 0.1.1 (2026-10-22)
 
 - **Denser layout.** Cards now pack into columns instead of a grid, so short cards no longer leave holes next to tall ones. Full-width cards (Conditions, Actions, Party) sit at the top.
