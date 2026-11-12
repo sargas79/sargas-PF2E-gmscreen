@@ -1,4 +1,4 @@
-import { MODULE_ID } from "./constants.js";
+import { I18N, MODULE_ID } from "./constants.js";
 
 export const SETTINGS = {
   windowState: "windowState",
@@ -8,6 +8,7 @@ export const SETTINGS = {
   notes: "notes",
   partyOverride: "partyOverride",
   treasureLog: "treasureLog",
+  compactHeaders: "compactHeaders",
 };
 
 export function registerSettings() {
@@ -63,6 +64,17 @@ export function registerSettings() {
     config: false,
     type: Array,
     default: [],
+  });
+
+  // Shrink crowded sheet headers to icons, so no button is pushed out of view.
+  game.settings.register(MODULE_ID, SETTINGS.compactHeaders, {
+    name: `${I18N}.Settings.CompactHeaders.Name`,
+    hint: `${I18N}.Settings.CompactHeaders.Hint`,
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+    requiresReload: true,
   });
 }
 

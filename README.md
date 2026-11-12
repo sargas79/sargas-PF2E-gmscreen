@@ -58,6 +58,10 @@ Players don't see the button and can't use the keybinding.
 
 Every card can be **pinned** (it then also shows at the top of every tab) or **collapsed**. The search box filters cards and the lists inside them.
 
+### Crowded sheet headers
+
+Modules add buttons to the title bar of actor and item sheets, and with enough of them the last ones, Close included, are pushed out of view. When a title bar runs out of room, the module shows its buttons as icons (hover for the name), and gives them a second row if they still don't fit. Sheets with room to spare are left as they are. You can turn this off under **Configure Settings → Fit crowded sheet headers**.
+
 ## Development
 
 The module has no build step. To have Foundry load it straight from your working copy, link the repo into your Foundry `Data/modules` folder:

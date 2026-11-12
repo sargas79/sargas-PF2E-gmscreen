@@ -1,6 +1,7 @@
 import { I18N, MODULE_ID } from "./constants.js";
 import { registerSettings } from "./settings.js";
 import { GMScreen } from "./apps/gm-screen.js";
+import { registerWindowHeaders } from "./window-headers.js";
 
 /** @type {GMScreen|null} */
 let screen = null;
@@ -26,6 +27,7 @@ function toggle() {
 
 Hooks.once("init", () => {
   registerSettings();
+  registerWindowHeaders();
 
   // `restricted` limits the keybinding to GMs.
   game.keybindings.register(MODULE_ID, "toggle", {
