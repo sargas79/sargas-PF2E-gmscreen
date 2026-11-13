@@ -9,6 +9,10 @@ import { SETTINGS, getSetting } from "./settings.js";
  * icons (the label moves to a tooltip), and let it wrap onto a second row if that isn't enough.
  *
  * V2 applications are left alone: their extra controls already collapse into a menu.
+ *
+ * Windows are found by watching the page, not through render hooks. An actor or item sheet
+ * only fires hooks up to `renderActorSheet` / `renderItemSheet`, never `renderApplication`,
+ * and any other V1 class can cut its hook chain short the same way.
  */
 
 const COMPACT = "gms-header-compact";
@@ -19,12 +23,15 @@ const LABEL = "gms-header-label";
 const MIN_TITLE_WIDTH = 120;
 
 /**
- * Headers being watched, with their application and the observer for DOM changes.
- * @type {WeakMap<HTMLElement, {app: object, observer: MutationObserver}>}
+ * The observer for DOM changes in each watched header.
+ * @type {WeakMap<HTMLElement, MutationObserver>}
  */
 const watched = new WeakMap();
 
-/** Last width fitted per header, so the resize observer ignores height-only changes. */
+/**
+ * Width of each header and title when last fitted, so the resize observer ignores
+ * height-only changes and the changes a fit makes itself.
+ */
 const fittedWidths = new WeakMap();
 
 /** Headers waiting for the next animation frame. */
@@ -32,7 +39,9 @@ const pending = new Set();
 
 const resizeObserver = new ResizeObserver((entries) => {
   for (const { target } of entries) {
-    if (fittedWidths.get(target) !== target.clientWidth) schedule(target);
+    if (fittedWidths.get(target) === target.clientWidth) continue;
+    const header = target.closest(".window-header");
+    if (header) schedule(header);
   }
 });
 
@@ -51,9 +60,13 @@ function schedule(header) {
   pending.add(header);
 }
 
+function titleOf(header) {
+  return header.querySelector(":scope > .window-title");
+}
+
 function isCrowded(header) {
   if (header.scrollWidth > header.clientWidth + 1) return true;
-  const title = header.querySelector(":scope > .window-title");
+  const title = titleOf(header);
   if (!title) return false;
   return title.scrollWidth > title.clientWidth + 1 && title.clientWidth < MIN_TITLE_WIDTH;
 }
@@ -91,10 +104,17 @@ function setTooltips(header, compact) {
   }
 }
 
+/** False while a window is minimized, or on its way there or back. */
+function isSettled(win) {
+  const app = ui.windows?.[win.dataset.appid];
+  return app ? app._minimized === false : !win.classList.contains("minimized");
+}
+
 function fit(header) {
-  // A window that is minimized, or on its way there or back, isn't at its real size. Keep the
-  // layout it had: it returns to the same width, and is fitted again once it's restored.
-  if (watched.get(header)?.app._minimized !== false) return;
+  const observer = watched.get(header);
+  // A minimized window isn't at its real size. Keep the layout it had: it returns to the same
+  // width, and is fitted again once it's restored.
+  if (!observer || !isSettled(header.parentElement)) return;
 
   // Measure from the natural layout each time, so a header that has room again gets its labels back.
   header.classList.remove(COMPACT, WRAP);
@@ -105,42 +125,59 @@ function fit(header) {
     if (isCrowded(header)) header.classList.add(WRAP);
   }
   setTooltips(header, compact);
+
+  const title = titleOf(header);
   fittedWidths.set(header, header.clientWidth);
+  if (title) fittedWidths.set(title, title.clientWidth);
+  // Don't answer the changes just made here with another fit.
+  observer.takeRecords();
 }
 
-function headerOf(app) {
-  if (!app.popOut) return null;
-  const element = app.element?.[0];
-  return element?.querySelector(":scope > .window-header") ?? null;
+/** The header of a V1 window element, or null for anything else. */
+function headerOf(node) {
+  if (node.nodeType !== Node.ELEMENT_NODE || !node.classList.contains("window-app")) return null;
+  return node.querySelector(":scope > .window-header");
 }
 
-function watch(app) {
-  if (!getSetting(SETTINGS.compactHeaders)) return;
-  const header = headerOf(app);
-  if (!header) return;
-  if (!watched.has(header)) {
-    const observer = new MutationObserver(() => schedule(header));
-    // Modules add their buttons at any point after the window renders.
-    observer.observe(header, { childList: true });
-    // The window drops its "minimized" class once it's fully restored.
-    observer.observe(header.parentElement, { attributes: true, attributeFilter: ["class"] });
-    watched.set(header, { app, observer });
-    resizeObserver.observe(header);
-  }
+function watch(win) {
+  const header = headerOf(win);
+  if (!header || watched.has(header) || !getSetting(SETTINGS.compactHeaders)) return;
+
+  const observer = new MutationObserver(() => schedule(header));
+  // Modules add buttons at any point after the window renders, and a re-render can change the title.
+  observer.observe(header, { childList: true, subtree: true, characterData: true });
+  // The window drops its "minimized" class once it's fully restored.
+  observer.observe(win, { attributes: true, attributeFilter: ["class"] });
+  watched.set(header, observer);
+
+  // The title takes the room the buttons leave, so its width changes whenever theirs does.
+  resizeObserver.observe(header);
+  const title = titleOf(header);
+  if (title) resizeObserver.observe(title);
+
   fit(header);
 }
 
-function unwatch(app) {
-  const header = headerOf(app);
-  if (!header) return;
-  watched.get(header)?.observer.disconnect();
+function unwatch(win) {
+  const header = headerOf(win);
+  const observer = header && watched.get(header);
+  if (!observer) return;
+  observer.disconnect();
   watched.delete(header);
   resizeObserver.unobserve(header);
+  const title = titleOf(header);
+  if (title) resizeObserver.unobserve(title);
   pending.delete(header);
 }
 
 export function registerWindowHeaders() {
-  // These fire for every V1 application, whatever its class.
-  Hooks.on("renderApplication", watch);
-  Hooks.on("closeApplication", unwatch);
+  // V1 windows are added to the page body when they open, and removed when they close.
+  const observer = new MutationObserver((records) => {
+    for (const record of records) {
+      for (const node of record.removedNodes) unwatch(node);
+      for (const node of record.addedNodes) watch(node);
+    }
+  });
+  observer.observe(document.body, { childList: true });
+  for (const win of document.body.children) watch(win);
 }
