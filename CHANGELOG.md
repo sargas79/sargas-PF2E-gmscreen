@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 (2026-11-13)
+
+- **Crowded sheet headers fit as soon as the sheet opens.** In 0.1.2 a newly opened actor or item sheet was not fitted at all, because Foundry doesn't announce those sheets the way it announces other windows. The module now spots every window as it opens.
+- A title bar is also re-fitted when a module changes a button's label or the sheet's title changes.
+
 ## 0.1.2 (2026-11-12)
 
 - **Crowded sheet headers fit.** When other modules add so many buttons to a sheet's title bar that some are cut off (Close included), the buttons now shrink to icons with the name on hover, and wrap to a second row if needed. It applies to every sheet, not only ones opened from the GM screen, and can be turned off in the module settings.
